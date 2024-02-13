@@ -1,16 +1,21 @@
-const { app, BrowserWindow } = require("electron");
-
+const { app, BrowserWindow, Menu } = require("electron");
+const env = process.env.ELECTRON_APP_ENV;
 let win;
 
 function createWindow() {
   // Create the browser window.
   win = new BrowserWindow({
-    width: 1600,
-    height: 1600,
+    width: 1024,
+    height: 576,
     backgroundColor: "#ffffff",
+    autoHideMenuBar: true,
   });
 
-  win.loadURL(`file://${__dirname}/dist/stack-gen/browser/index.html`);
+  if (env && env.trim() === "production") {
+    win.loadURL(`file://${__dirname}/dist/infra-gen/browser/index.html`);
+  } else {
+    win.loadURL("http://localhost:4200/");
+  }
 
   // // uncomment below to open the DevTools.
   // win.webContents.openDevTools();
@@ -20,9 +25,10 @@ function createWindow() {
     win = null;
   });
 }
-
 // Create window on electron intialization
-app.on("ready", createWindow);
+app.on("ready", () => {
+  createWindow();
+});
 
 // Quit when all windows are closed.
 app.on("window-all-closed", function () {
