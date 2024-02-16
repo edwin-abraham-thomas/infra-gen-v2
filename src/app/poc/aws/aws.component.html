@@ -1,1 +1,9 @@
-<p>aws works!</p>
+<p>aws</p>
+
+<button (click)="trigger()">Trigger Lambda Get</button>
+
+@if (lambdaFunction) {
+    <div>
+        {{lambdaFunction | json}}
+    </div>
+}

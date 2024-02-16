@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { AppRoutingModule } from './app-routing.module';
-import { Router } from '@angular/router';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +15,10 @@ export class AppComponent {
    *
    */
   constructor(private readonly _router: Router) {
-    this.routes = this._router.config.map(r => r.path)
+    this.routes = [
+      'poc/aws',
+      'poc/fs'
+    ]
   }
 
   navigateTo(route: string | undefined) {

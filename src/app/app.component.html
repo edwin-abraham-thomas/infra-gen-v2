@@ -1,9 +1,11 @@
-<h1>Routes</h1>
+<p>Home</p>
 
 @for (route of routes; track $index) {
-<a [routerLink]="route">
-  {{ route }}
-</a>
-}
+    <div>
+        <a [routerLink]="route">
+          {{ route }}
+        </a>
+    </div>
+    }
 
 <router-outlet></router-outlet>
