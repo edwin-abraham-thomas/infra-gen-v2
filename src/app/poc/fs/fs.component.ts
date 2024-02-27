@@ -7,11 +7,12 @@ import { DataAccessService } from '../../shared/services/data-access.service';
   styleUrl: './fs.component.scss'
 })
 export class FsComponent {
+
+  data: unknown;
   
   constructor(private readonly _dataAccessService: DataAccessService) {}
 
-  trigger(): void {
-    const path = this._dataAccessService.getPath();
-    console.log('Path', path);
+  async trigger(): Promise<void> {
+    this.data = await this._dataAccessService.getSystemInfo();
   }
 }
