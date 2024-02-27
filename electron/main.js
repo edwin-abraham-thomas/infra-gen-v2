@@ -1,4 +1,5 @@
-const { app, BrowserWindow, Menu } = require("electron");
+const { app, BrowserWindow, Menu, ipcMain } = require("electron");
+const { join } = require("path");
 const env = process.env.ELECTRON_APP_ENV;
 let win;
 
@@ -8,17 +9,17 @@ function createWindow() {
     width: 1024,
     height: 576,
     backgroundColor: "#ffffff",
-    autoHideMenuBar: true,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: true,
+      preload: join(__dirname, `./preload.js`)
+    }
   });
 
-  if (env && env.trim() === "production") {
-    win.loadURL(`file://${__dirname}/dist/infra-gen/browser/index.html`);
-  } else {
-    win.loadURL("http://localhost:4200/");
-  }
+  win.loadFile(join(__dirname, `../dist/infra-gen/browser/index.html`));
 
-  // // uncomment below to open the DevTools.
-  // win.webContents.openDevTools();
+  // uncomment below to open the DevTools.
+  win.webContents.openDevTools();
 
   // Event when the window is closed.
   win.on("closed", function () {
@@ -43,4 +44,10 @@ app.on("activate", function () {
   if (win === null) {
     createWindow();
   }
+});
+
+ipcMain.handle("get-system-info", async (event, args) => {
+  return {
+    key: "value",
+  };
 });

@@ -1,14 +1,19 @@
 import { Injectable } from '@angular/core';
-import { app } from 'electron';
+import { IpcRenderer } from 'electron';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataAccessService {
-  constructor() {}
+
+  constructor() {
+  }
 
   getPath(): string {
-    
-    return app.getAppPath();
+    return '';
+  }
+
+  async getSystemInfo(): Promise<unknown> {
+    return await (window as any).api.getSystemInfo();
   }
 }
