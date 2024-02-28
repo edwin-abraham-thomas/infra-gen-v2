@@ -1,7 +1,6 @@
 const { ipcRenderer, contextBridge } = require("electron");
+const { channels } = require("./channels.js");
 
-
-contextBridge.exposeInMainWorld('api', {
-    test: 'testvalue',
-    getSystemInfo: () => ipcRenderer.invoke('get-system-info')
-})
+contextBridge.exposeInMainWorld("api", {
+  healthCheck: () => ipcRenderer.invoke(channels.heathCheck),
+});

@@ -13,6 +13,6 @@ export class FsComponent {
   constructor(private readonly _dataAccessService: DataAccessService) {}
 
   async trigger(): Promise<void> {
-    this.data = await this._dataAccessService.getSystemInfo();
+    this.data = await this._dataAccessService.healthCheck();
   }
 }

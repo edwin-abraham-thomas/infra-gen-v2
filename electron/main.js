@@ -1,6 +1,5 @@
-const { app, BrowserWindow, Menu, ipcMain } = require("electron");
+const { app, BrowserWindow, ipcMain } = require("electron");
 const { join } = require("path");
-const env = process.env.ELECTRON_APP_ENV;
 let win;
 
 function createWindow() {
@@ -12,14 +11,14 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: true,
-      preload: join(__dirname, `./preload.js`)
-    }
+      preload: join(__dirname, `./preload.js`),
+    },
   });
 
   win.loadFile(join(__dirname, `../dist/infra-gen/browser/index.html`));
 
-  // uncomment below to open the DevTools.
-  win.webContents.openDevTools();
+  // // uncomment below to open the DevTools.
+  // win.webContents.openDevTools();
 
   // Event when the window is closed.
   win.on("closed", function () {
@@ -46,8 +45,5 @@ app.on("activate", function () {
   }
 });
 
-ipcMain.handle("get-system-info", async (event, args) => {
-  return {
-    key: "value",
-  };
-});
+const appHandlers = require("./applicationHandlers.js");
+appHandlers.addHandlers(ipcMain);

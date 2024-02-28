@@ -6,10 +6,13 @@
     "ng": "ng",
     "start": "ng serve --configuration development",
     "build": "ng build",
+    "build-prod": "ng build  --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "electron": "electron . --trace-warnings",
-    "electron-start": "npm run build && electron ."
+    "electron-start": "npm run build && electron .",
+    "electron-package-windows": "electron-packager . --out .\\dist\\electron-package --ignore node_modules --ignore src --ignore /^\\. --ignore /^tsconfig --ignore secrets.json --ignore angular.json --overwrite",
+    "electron-build-package-windows": "npm run build-prod && npm run electron-package-windows"
   },
   "private": true,
   "dependencies": {
@@ -32,13 +35,14 @@
     "@angular/cli": "^17.0.0",
     "@angular/compiler-cli": "^17.0.0",
     "@types/jasmine": "~5.1.0",
+    "electron": "^29.1.0",
+    "electron-packager": "^17.1.2",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "ngx-electron": "^2.2.0",
     "typescript": "~5.2.2"
   }
 }

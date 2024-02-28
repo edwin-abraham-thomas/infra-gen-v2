@@ -1,19 +1,13 @@
 import { Injectable } from '@angular/core';
-import { IpcRenderer } from 'electron';
+import { ElectronService } from './electron.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataAccessService {
+  constructor(private readonly _electronService: ElectronService) {}
 
-  constructor() {
-  }
-
-  getPath(): string {
-    return '';
-  }
-
-  async getSystemInfo(): Promise<unknown> {
-    return await (window as any).api.getSystemInfo();
+  async healthCheck(): Promise<boolean>{
+    return await this._electronService.healthCheck();
   }
 }
