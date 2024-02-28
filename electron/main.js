@@ -17,8 +17,8 @@ function createWindow() {
 
   win.loadFile(join(__dirname, `../dist/infra-gen/browser/index.html`));
 
-  // uncomment below to open the DevTools.
-  win.webContents.openDevTools();
+  // // uncomment below to open the DevTools.
+  // win.webContents.openDevTools();
 
   // Event when the window is closed.
   win.on("closed", function () {

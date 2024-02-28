@@ -1,5 +1,6 @@
 const { ipcRenderer, contextBridge } = require("electron");
+const { channels } = require("./channels.js");
 
 contextBridge.exposeInMainWorld("api", {
-  healthCheck: () => ipcRenderer.invoke("health-check"),
+  healthCheck: () => ipcRenderer.invoke(channels.heathCheck),
 });

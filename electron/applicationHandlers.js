@@ -1,5 +1,7 @@
+const { channels } = require("./channels.js");
+
 function addHandlers(ipcMain) {
-  ipcMain.handle("health-check", async (event, args) => {
+  ipcMain.handle(channels.heathCheck, async (event, args) => {
     return true;
   });
 }
